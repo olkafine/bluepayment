@@ -5,6 +5,9 @@ namespace BlueMedia\BluePayment\Block\Customer;
 use BlueMedia\BluePayment\Model\Card as CardModel;
 use Magento\Framework\View\Element\Template;
 
+/**
+ * @api
+ */
 class Card extends Template
 {
     /** @var CardModel */

@@ -4,6 +4,9 @@ namespace BlueMedia\BluePayment\Block\Processing;
 
 use Magento\Framework\View\Element\Template;
 
+/**
+ * @api
+ */
 class Redirect extends Template
 {
     /**

@@ -6,6 +6,9 @@ use BlueMedia\BluePayment\Api\ShouldShowAutopayInterface;
 use BlueMedia\BluePayment\Model\Autopay\ConfigProvider;
 use Magento\Framework\View\Element\Template;
 
+/**
+ * @api
+ */
 class AutopaySdk extends Template
 {
     /** @var ConfigProvider */

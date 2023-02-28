@@ -10,6 +10,9 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Framework\Registry;
 use Magento\Sales\Api\Data\OrderInterface;
 
+/**
+ * @api
+ */
 class Popup extends Template
 {
     /** @var Registry */

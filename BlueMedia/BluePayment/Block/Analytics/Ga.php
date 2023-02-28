@@ -9,6 +9,9 @@ use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
+/**
+ * @api
+ */
 class Ga extends Template
 {
     /**

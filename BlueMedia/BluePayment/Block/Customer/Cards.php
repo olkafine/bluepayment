@@ -7,6 +7,9 @@ use BlueMedia\BluePayment\Model\ResourceModel\Card\CollectionFactory as CardColl
 use Magento\Customer\Model\Session;
 use Magento\Framework\View\Element\Template;
 
+/**
+ * @api
+ */
 class Cards extends Template
 {
     /** @var CardCollectionFactory */
