@@ -28,22 +28,19 @@ class ConfigProvider implements ConfigProviderInterface
     public const PAYPO_GATEWAY_ID = 705;
     public const CARD_GATEWAY_ID = 1500;
     public const ONECLICK_GATEWAY_ID = 1503;
-    public const ALIOR_INSTALLMENTS_GATEWAY_ID = 1506;
     public const GPAY_GATEWAY_ID = 1512;
     public const APPLE_PAY_GATEWAY_ID = 1513;
-    public const VISA_MOBILE_GATEWAY_ID = 1523;
+    public const ALIOR_INSTALLMENTS_GATEWAY_ID = 1506;
 
     public const ALWAYS_SEPARATED = [
-        self::BLIK_GATEWAY_ID,
-        self::SMARTNEY_GATEWAY_ID,
-        self::HUB_GATEWAY_ID,
-        self::PAYPO_GATEWAY_ID,
         self::CARD_GATEWAY_ID,
         self::ONECLICK_GATEWAY_ID,
-        self::ALIOR_INSTALLMENTS_GATEWAY_ID,
         self::GPAY_GATEWAY_ID,
         self::APPLE_PAY_GATEWAY_ID,
-        self::VISA_MOBILE_GATEWAY_ID,
+        self::SMARTNEY_GATEWAY_ID,
+        self::ALIOR_INSTALLMENTS_GATEWAY_ID,
+        self::HUB_GATEWAY_ID,
+        self::PAYPO_GATEWAY_ID,
     ];
 
     public const STATIC_GATEWAY_NAME = [
@@ -86,16 +83,14 @@ class ConfigProvider implements ConfigProviderInterface
     private $defaultSortOrder = [
         '', // Avoid pushing first element to the end
         509, // BLIK
-        1503, // Kartowa płatność automatyczna
-        1500, // Płatność kartą
-        1523, // Visa Mobile
-        1512, // Google Pay
-        1513, // Apple Pay
-
         700, // Smartney
         1506, // Alior Raty
         705, // PayPo
 
+        1503, // Kartowa płatność automatyczna
+        1500, // Płatność kartą
+        1512, // Google Pay
+        1513, // Apple Pay
         1511, // Visa Checkout
 
         106, // Tylko na teście
@@ -207,11 +202,11 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * Returns whether the continuation link should be disabled after transaction expiration.
      *
-     * @return int
+     * @return bool
      */
-    public function getTransactionLifetime(): int
+    public function getTransactionLifetime(): bool
     {
-        return (int) $this->scopeConfig->getValue(
+        return $this->scopeConfig->isSetFlag(
             'payment/bluepayment/transaction_life_hours',
             ScopeInterface::SCOPE_STORE
         );
@@ -268,7 +263,7 @@ class ConfigProvider implements ConfigProviderInterface
             /** @var Gateway $gateway */
             foreach ($gateways as $gateway) {
                 if ($gateway->getGatewayId() != self::ONECLICK_GATEWAY_ID
-                    || $this->customerSession->isLoggedIn() // AutoPay only for logger users
+                    || $this->customerSession->isLoggedIn() // One click payment only for logger users
                 ) {
                     if ($gateway->isSeparatedMethod()) {
                         $resultSeparated[] = $this->prepareGatewayStructure($gateway);
@@ -460,10 +455,7 @@ class ConfigProvider implements ConfigProviderInterface
     ): GatewayCollection {
         $storeId = $this->storeManager->getStore()->getId();
 
-        $serviceId = $this->scopeConfig->getValue(
-            'payment/bluepayment/' . strtolower($currency) . '/service_id',
-            ScopeInterface::SCOPE_STORE
-        );
+        $serviceId = $this->getServiceId($currency);
 
         $gateways = $this->gatewayCollectionFactory->create()
             ->addFieldToFilter(GatewayInterface::STORE_ID, ['eq' => $storeId])
@@ -491,6 +483,22 @@ class ConfigProvider implements ConfigProviderInterface
         return $gateways->load();
     }
 
+    public function getServiceId(string $currency = 'PLN')
+    {
+        return $this->scopeConfig->getValue(
+            'payment/bluepayment/' . strtolower($currency) . '/service_id',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getSharedKey(string $currency = 'PLN')
+    {
+        return $this->scopeConfig->getValue(
+            'payment/bluepayment/' . strtolower($currency) . '/shared_key',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function isGatewaySelectionEnabled(): bool
     {
         return (bool) $this->scopeConfig->getValue(
@@ -499,7 +507,7 @@ class ConfigProvider implements ConfigProviderInterface
         );
     }
 
-    protected function iframePayment(): bool
+    public function iframePayment(): bool
     {
         return (bool) $this->scopeConfig->getValue(
             'payment/bluepayment/iframe_payment',
@@ -507,7 +515,7 @@ class ConfigProvider implements ConfigProviderInterface
         );
     }
 
-    protected function blikZero(): bool
+    public function blikZero(): bool
     {
         return (bool) $this->scopeConfig->getValue(
             'payment/bluepayment/blik_zero',

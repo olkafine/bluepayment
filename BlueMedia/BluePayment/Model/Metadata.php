@@ -8,7 +8,7 @@ use Magento\Framework\App\ProductMetadataInterface;
 
 class Metadata
 {
-    private const VERSION = '2.21.4';
+    private const VERSION = '2.22.9';
 
     /** @var ProductMetadataInterface */
     private $productMetadata;
@@ -26,7 +26,7 @@ class Metadata
      */
     public function getMagentoVersion(): string
     {
-        return $this->productMetadata->getVersion() ?? 'n/a';
+        return $this->productMetadata->getVersion();
     }
 
     /**
@@ -36,7 +36,7 @@ class Metadata
      */
     public function getMagentoEdition(): string
     {
-        return $this->productMetadata->getEdition() ?? 'n/a';
+        return $this->productMetadata->getEdition();
     }
 
     /**

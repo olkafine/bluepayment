@@ -23,12 +23,7 @@
                 <field id="test_mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Test Mode</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[It allows you to check the module without paying for the order (no order payments are charged in test mode).]]></comment>
                 </field>
-                <field id="test_mode_info" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <frontend_model>BlueMedia\BluePayment\Block\Adminhtml\System\Config\Form\Field\TestMode</frontend_model>
-                </field>
-
                 <field id="status_waiting_payment" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Status waiting payment</label>
                     <source_model>BlueMedia\BluePayment\Model\Config\Order\Status</source_model>
@@ -176,7 +171,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="eur" translate="label" type="text" sortOrder="710" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -185,7 +180,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="gbp" translate="label" type="text" sortOrder="720" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -194,7 +189,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="usd" translate="label" type="text" sortOrder="730" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -203,7 +198,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="czk" translate="label" type="text" sortOrder="740" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -212,7 +207,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="ron" translate="label" type="text" sortOrder="750" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -221,7 +216,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="huf" translate="label" type="text" sortOrder="760" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -230,7 +225,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="bgn" translate="label" type="text" sortOrder="770" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -239,7 +234,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="uah" translate="label" type="text" sortOrder="780" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -248,7 +243,7 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
                     </field>
                 </group>
                 <group id="sek" translate="label" type="text" sortOrder="790" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -257,7 +252,55 @@
                         <label>Service partner ID</label>
                     </field>
                     <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Configuration key (hash)</label>
+                        <label>Shared key</label>
+                    </field>
+                </group>
+            </group>
+            <group id="autopay" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Autopay</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Source\AutopayActive</source_model>
+                    <comment>For Hidden option - Autopay will be enabled only for URLs with added ?test_autopay parameter.</comment>
+                </field>
+                <field id="test_mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="merchant_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Merchant ID</label>
+                    <comment>Used only for Autopay.</comment>
+                </field>
+                <field id="secret_key" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secret Key</label>
+                </field>
+
+                <group id="button" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Autopay Checkout Button Style</label>
+
+                    <field id="theme" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Theme</label>
+                        <source_model>BlueMedia\BluePayment\Model\Config\Source\AutopayTheme</source_model>
+                    </field>
+
+                    <field id="width" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Width</label>
+                        <source_model>BlueMedia\BluePayment\Model\Config\Source\AutopayWidth</source_model>
+                    </field>
+
+                    <field id="rounded" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Rounded</label>
+                        <source_model>BlueMedia\BluePayment\Model\Config\Source\AutopayRounded</source_model>
+                    </field>
+
+                    <field id="margin_top" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Margin Top</label>
+                        <source_model>BlueMedia\BluePayment\Model\Config\Source\AutopayMargin</source_model>
+                    </field>
+
+                    <field id="margin_bottom" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Margin Bottom</label>
+                        <source_model>BlueMedia\BluePayment\Model\Config\Source\AutopayMargin</source_model>
                     </field>
                 </group>
             </group>

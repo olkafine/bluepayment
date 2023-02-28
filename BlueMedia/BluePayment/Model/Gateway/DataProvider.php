@@ -84,7 +84,7 @@ class DataProvider extends AbstractDataProvider
      */
     protected function isAlwaysSeparated(int $gatewayId): bool
     {
-        return in_array($gatewayId, ConfigProvider::ALWAYS_SEPARATED);
+        return array_contains(ConfigProvider::ALWAYS_SEPARATED, $gatewayId);
     }
 
     /**
@@ -96,7 +96,7 @@ class DataProvider extends AbstractDataProvider
      */
     protected function hasStaticName(int $gatewayId): bool
     {
-        return in_array($gatewayId, ConfigProvider::STATIC_GATEWAY_NAME);
+        return array_contains(ConfigProvider::STATIC_GATEWAY_NAME, $gatewayId);
     }
 }
 

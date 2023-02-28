@@ -139,23 +139,23 @@
                          visible: $parent.isRadioButtonVisible()
                        "/>
 
-                <label data-bind="attr:{for:  $parent.getCode() + $data.gateway_id }" class="label">
-                    <img src=""
-                         data-bind="attr: {src: logo_url,alt: name}"
-                         class="payment-icon"/>
+            <label data-bind="attr:{for:  $parent.getCode() + $data.gateway_id }" class="label">
+                <img src=""
+                     data-bind="attr: {src: logo_url,alt: name}"
+                     class="payment-icon"/>
 
-                    <p class="method-name">
-                        <span data-bind="text: $parent.getGatewayTitle($data)" class="payment-method-name"></span>
-                        <!-- ko if: $parent.getGatewayDescription($data) -->
+                <p class="method-name">
+                    <span data-bind="text: $parent.getGatewayTitle($data)" class="payment-method-name"></span>
+                    <!-- ko if: $parent.getGatewayDescription($data) -->
                         <br />
                         <span data-bind="html: $parent.getGatewayDescription($data)" class="payment-method-description"></span>
-                        <!-- /ko -->
+                    <!-- /ko -->
 
-                        <!-- ko if: ($parent.getGatewayHelp($data) && $parent.isSeparatedChecked($data)) -->
+                    <!-- ko if: ($parent.getGatewayHelp($data) && $parent.isSeparatedChecked($data)) -->
                         <span data-bind="html: $parent.getGatewayHelp($data)" class="payment-method-help-text"></span>
-                        <!-- /ko -->
-                    </p>
-                </label>
+                    <!-- /ko -->
+                </p>
+            </label>
 
             <!-- ko if: ($data.is_blik && $parent.isSeparatedChecked($data)) -->
                 <input type="tel"
