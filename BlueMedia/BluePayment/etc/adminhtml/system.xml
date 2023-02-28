@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="bluepayment" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Blue Media Online Payment</label>
+                <fieldset_css>complex bluepayment-section</fieldset_css>
+                <frontend_model>BlueMedia\BluePayment\Block\Adminhtml\System\Config\Form\Fieldset</frontend_model>
+
+                <field id="info" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>BlueMedia\BluePayment\Block\Adminhtml\System\Config\Form\Field\Introduction</frontend_model>
+                </field>
+
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gateway_selection" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show payment gateways in store</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Source\ShowGateways</source_model>
+                </field>
+                <field id="test_mode" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[It allows you to check the module without paying for the order (no order payments are charged in test mode).]]></comment>
+                </field>
+                <field id="test_mode_info" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>BlueMedia\BluePayment\Block\Adminhtml\System\Config\Form\Field\TestMode</frontend_model>
+                </field>
+
+                <field id="status_waiting_payment" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Status waiting payment</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Order\Status</source_model>
+                </field>
+                <field id="status_accept_payment" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Status accept payment</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Order\Status</source_model>
+                </field>
+                <field id="status_error_payment" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Status error payment</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Order\Status</source_model>
+                </field>
+                <field id="unchangeable_statuses" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Unchangeable statuses</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Order\Status</source_model>
+                    <comment><![CDATA[Orders with this statuses won't have an automatic status change.]]></comment>
+                </field>
+                <field id="transaction_life_hours" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Transaction Life Hours</label>
+                </field>
+                <field id="disable_link_after_expiration" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable payment continuation link when transaction expires</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Link available in order confirmation e-mail and in order detail in customer account will be expired after reaching Transaction Life Hours set above.]]></comment>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="121" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Order</label>
+                </field>
+                <field id="disabled_gateways_notification_active" translate="label comment" type="select" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled disabled gateways notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="disabled_gateways_notification_sender_name" translate="label comment" type="text" sortOrder="510" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disabled gateways notification Sender Name</label>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="disabled_gateways_notification_receivers" translate="label comment" sortOrder="520" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disabled gateways notification Receivers</label>
+                    <frontend_model>BlueMedia\BluePayment\Block\Adminhtml\System\Config\Form\Field\Receivers</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="disabled_gateways_notification_template" translate="label comment" type="select" sortOrder="530" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disabled gateways notification Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="iframe_payment" translate="label comment" type="select" sortOrder="550" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Iframe Payment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment><![CDATA[Payment without redirecting to BM gateway.]]></comment>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="blik_zero" translate="label comment" type="select" sortOrder="555" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>BLIK 0</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment><![CDATA[Payment with BLIK code field directly on cart page, without redirecting to eblik.pl.]]></comment>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="collapsible" translate="label comment" type="select" sortOrder="560" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Collapsible gateway list</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="autopay_agreement" translate="label comment" type="editor" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Autopay Agreement</label>
+                    <depends>
+                        <field id="gateway_selection">1</field>
+                    </depends>
+                </field>
+                <field id="waiting_page" translate="label comment" type="select" sortOrder="610" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show waiting page before redirect</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="waiting_page_seconds" translate="label" type="text" sortOrder="620" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Seconds to wait before redirect</label>
+                    <validate>integer</validate>
+                    <comment>How many second wait on intermediate page, before redirect to BM payment.</comment>
+                </field>
+                <field id="show_manual_refund" translate="label comment" type="select" sortOrder="630" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show manual BM refund in order details</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="status_full_refund" translate="label" type="select" sortOrder="631" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Status full refund</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Order\Status</source_model>
+                </field>
+                <field id="status_partial_refund" translate="label" type="select" sortOrder="632" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Status partial refund</label>
+                    <source_model>BlueMedia\BluePayment\Model\Config\Order\Status</source_model>
+                </field>
+
+                <group id="consumer_finance" translate="label" type="text" sortOrder="699" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Promoting payments</label>
+
+                    <field id="info" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Promoting payments information</label>
+                        <frontend_model>BlueMedia\BluePayment\Block\Adminhtml\System\Config\Form\Field\ConsumerFinanceInfo</frontend_model>
+                    </field>
+
+                    <field id="top" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>At the top of the page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="navigation" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Under the navigation</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="listing" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>On the product list</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="product" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>On the product page under the buttons</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="cart" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>In the shopping cart under the products</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+
+                <group id="pln" translate="label" type="text" sortOrder="700" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>PLN configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="eur" translate="label" type="text" sortOrder="710" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>EUR configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="gbp" translate="label" type="text" sortOrder="720" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>GBP configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="usd" translate="label" type="text" sortOrder="730" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>USD configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="czk" translate="label" type="text" sortOrder="740" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CZK configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="ron" translate="label" type="text" sortOrder="750" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>RON configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="huf" translate="label" type="text" sortOrder="760" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>HUF configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="bgn" translate="label" type="text" sortOrder="770" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>BGN configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="uah" translate="label" type="text" sortOrder="780" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>UAH configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+                <group id="sek" translate="label" type="text" sortOrder="790" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SEK configuration</label>
+                    <field id="service_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Service partner ID</label>
+                    </field>
+                    <field id="shared_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Configuration key (hash)</label>
+                    </field>
+                </group>
+            </group>
+        </section>
+
+        <section id="google" translate="label" type="text" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Google API</label>
+            <tab>sales</tab>
+            <resource>Magento_GoogleAnalytics::google</resource>
+            <group id="analytics" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google Analytics</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="account" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Account Number (Old)</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+                <field id="account_ga4" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Account Number (GA4)</label>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+
+                <field id="api_secret" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Secret</label>
+                    <comment>To create a new secret, navigate in the Google Analytics UI "Admin > Data Streams > choose your stream > Measurement Protocol > Create"</comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+
+                <field id="anonymize" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Anonymize IP</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

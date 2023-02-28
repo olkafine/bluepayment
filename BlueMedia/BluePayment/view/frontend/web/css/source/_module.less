@@ -1,0 +1,337 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 2016-12-07, 16:07:23
+    Author     : krzysztof
+*/
+& when (@media-common = true) {
+    .blik-modal {
+        .modal-inner-wrap {
+            width: 400px !important;
+            text-align: center;
+            padding-bottom: 20px;
+            margin-left: -200px !important;
+
+            div.loader {
+                box-sizing: border-box;
+                width: 40px;
+                height: 40px;
+                padding-left: 40px;
+                z-index: 2;
+                background: url("../images/loader-2.gif") no-repeat 50% 50%;
+                background-size: 200px;
+                margin: 0 auto 20px auto;
+            }
+        }
+    }
+
+    .blue-payment {
+        min-height: 130px;
+        padding-bottom: 0;
+
+        &__blik {
+            .blik-code {
+                width: 200px;
+                margin-left: 15px;
+            }
+        }
+
+        &__card {
+            .payment-method-title {
+                .separated-payments-wrapper:not(:first-child) & {
+                    border-top: 1px solid #cccccc !important;
+                }
+            }
+        }
+
+        &__blik {
+            .payment-method-title {
+                .separated-payments-wrapper:not(:first-child) & {
+                    border-top: 1px solid #cccccc !important;
+                }
+            }
+        }
+
+        .payment-method-info {
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+
+        .payment-method-title {
+            display: flex;
+            align-items: center;
+
+            input:focus,
+            select:focus,
+            textarea:focus,
+            button:focus {
+                outline: none;
+            }
+
+            label {
+                display: flex;
+                align-items: center;
+            }
+
+            .payment-method-help-text {
+                display: block;
+                font-size: 1.2rem;
+                margin-top: 10px;
+                color: #666666;
+            }
+        }
+
+        .payment-method-note {
+            font-size: 14px;
+        }
+
+        .payment-icon {
+            max-width: 100px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .bluepayment-options-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border-width: 1px 0 0 1px;
+            border-style: solid;
+            border-color: transparent;
+            display: flex;
+            flex-wrap: wrap;
+
+            .payment-option {
+                border: 2px solid #edeced;
+                box-sizing: border-box;
+                text-align: center;
+                flex: 1 1 auto;
+                flex-grow: 0;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                justify-items: center;
+                width: 180px;
+
+                padding: 5px 10px;
+                margin: 5px;
+                border-radius: 15px;
+
+                &:hover {
+                    border: 2px solid #c6c6c6;
+                }
+
+                &._active {
+                    border: 2px solid #00B5DD;
+                    z-index: 1;
+
+                    &:hover {
+                        border: 2px solid #00B5DD;
+                    }
+                }
+
+                .radio {
+                    display: none;
+                }
+            }
+
+            .card-option {
+                float: left;
+                width: 50%;
+                height: 84px;
+                position: relative;
+                border: 1px solid #e6e6e6;
+                margin: -1px 0 0 -1px;
+                box-sizing: border-box;
+
+                &._active {
+                    outline: 2px solid #a6a6a6;
+                    outline-offset: -2px;
+                    z-index: 1;
+                }
+            }
+
+            .payment-logo {
+                max-height: 80px;
+            }
+
+            input.radio {
+                height: 13px;
+                margin: 0;
+                position: absolute;
+                top: calc(~"50% - 6px");
+                left: 30px;
+
+                &:active, &:focus, &:hover, &.active {
+                    outline: 0;
+                    box-shadow: none;
+                }
+            }
+            span {
+                display: block;
+                &.details {
+                    left: 150px;
+                    top: 50%;
+                    position: absolute;
+                    transform: translateY(-50%);
+                    padding-right: 10px;
+                }
+                &.title {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .actions-toolbar {
+            .primary {
+                button {
+                    line-height: 2.2rem;
+                    padding: 14px 17px;
+                    font-size: 1.8rem;
+                }
+            }
+        }
+
+        .gateway-collapsible {
+            text-align: center;
+            margin-top: 10px;
+
+            a {
+                text-decoration: none;
+
+                &::after {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #757575;
+                    content: '\e622';
+                    font-family: 'luma-icons';
+                    margin: 0 0 0 10px;
+                    vertical-align: middle;
+                    display: inline-block;
+                    font-weight: normal;
+                    overflow: hidden;
+                    speak: none;
+                    text-align: center;
+                }
+
+                &.collapse {
+                    &::after {
+                        content: '\e621';
+                    }
+                }
+            }
+        }
+
+        &.multishipping {
+            min-height: auto;
+
+            .bluepayment-options-list {
+                .payment-option {
+                    width: 33%;
+                }
+
+                .card-option {
+                    width: 100%;
+                }
+
+                span.title {
+                    margin-bottom: 0;
+                }
+            }
+
+            .mage-error {
+                clear: both;
+                font-size: 0.95em;
+                font-weight: bold;
+                line-height: 1.25em;
+                margin-top: 3px;
+                min-height: 15px;
+                padding-left: 17px;
+                color: #DF280A;
+            }
+        }
+
+        .payment-method-title {
+            .method-name {
+                display: inline-block;
+                margin: 0;
+
+                .payment-method-name {
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                }
+
+                .payment-method-description {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+
+    .bluepayment-agreements-block {
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        .bluepayment-agreement {
+            display: flex;
+            margin-top: 5px;
+
+            color: #6b6b6b;
+            font-size: 1.2rem;
+
+            &.required {
+                label {
+                    content: none;
+
+                    span {
+                        &:after {
+                            content: '*';
+                            .lib-typography(
+                                @_font-size: @form-field-label-asterisk__font-size,
+                                @_color: @form-field-label-asterisk__color,
+                                @_font-family: @form-field-label-asterisk__font-family,
+                                @_font-weight: @form-field-label-asterisk__font-weight,
+                                @_line-height: @form-field-label-asterisk__line-height,
+                                @_font-style: @form-field-label-asterisk__font-style
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l) {
+    .blue-payment {
+        .bluepayment-options-list {
+            .payment-option {
+                width: 100%;
+
+                label {
+                    margin-left: 0;
+                    &:before {
+                        left: 10px;
+                    }
+                }
+                &.hide-option{
+                    display: none;
+                }
+            }
+            .mobile-show-more{
+                text-align: center;
+                float: left;
+                width: 100%;
+                padding: 30px 0 0;
+
+            }
+        }
+    }
+}
+
+@import "_consumer-finance";

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="BlueMedia\BluePayment\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="BlueMedia\BluePayment\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">BlueMediaLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">BlueMedia\BluePayment\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Payment gateways grid -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="gateway_listing_data_source" xsi:type="string">
+                    BlueMedia\BluePayment\Model\ResourceModel\Gateway\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="BlueMedia\BluePayment\Model\ResourceModel\Gateway\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">blue_gateways</argument>
+            <argument name="eventPrefix" xsi:type="string">gateway_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">gateway_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">BlueMedia\BluePayment\Model\ResourceModel\Gateway</argument>
+        </arguments>
+    </type>
+    <!-- /Payment gateways grid -->
+
+    <!-- Extend Order grid with payment_channel -->
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="payment_channel" xsi:type="string">sales_order.payment_channel</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- /Extend Order grid with payment_channel -->
+
+    <preference for="BlueMedia\BluePayment\Api\GatewayRepositoryInterface" type="BlueMedia\BluePayment\Model\GatewayRepository"/>
+    <preference for="BlueMedia\BluePayment\Api\Data\GatewayInterface" type="BlueMedia\BluePayment\Model\Gateway"/>
+    <preference for="BlueMedia\BluePayment\Api\TransactionRepositoryInterface" type="BlueMedia\BluePayment\Model\TransactionRepository"/>
+    <preference for="BlueMedia\BluePayment\Api\Data\TransactionInterface" type="BlueMedia\BluePayment\Model\Transaction"/>
+    <preference for="BlueMedia\BluePayment\Api\RefundTransactionRepositoryInterface" type="BlueMedia\BluePayment\Model\RefundTransactionRepository"/>
+    <preference for="BlueMedia\BluePayment\Api\Data\RefundTransactionInterface" type="BlueMedia\BluePayment\Model\RefundTransaction"/>
+</config>
