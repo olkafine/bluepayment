@@ -20,6 +20,8 @@ use Magento\Store\Model\ScopeInterface;
 
 /**
  * Order details buttons block
+ *
+ * @api
  */
 class Buttons extends View
 {

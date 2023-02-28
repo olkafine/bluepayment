@@ -5,6 +5,9 @@ namespace BlueMedia\BluePayment\Block\Processing;
 use Magento\Framework\View\Element\Template;
 use Magento\Sales\Model\Order;
 
+/**
+ * @api
+ */
 class Back extends Template
 {
     /**

@@ -12,6 +12,9 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\Element\Template;
 use Magento\Catalog\Helper\Data as CatalogHelper;
 
+/**
+ * @api
+ */
 class GaData extends Template
 {
     /** @var Resolver */

@@ -9,6 +9,9 @@ use Magento\Framework\View\Element\Template\Context;
 use BlueMedia\BluePayment\Model\ResourceModel\Gateway\CollectionFactory;
 use Magento\Store\Model\ScopeInterface;
 
+/**
+ * @api
+ */
 class Head extends Template
 {
     /** @var CollectionFactory */

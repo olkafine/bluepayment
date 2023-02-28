@@ -6,6 +6,9 @@ use BlueMedia\BluePayment\Model\ConfigProvider;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 
+/**
+ * @api
+ */
 class ConsumerFinance extends Template
 {
     /** @var ConfigProvider */
